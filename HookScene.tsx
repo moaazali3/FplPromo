@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame, interpolate, Img, staticFile, spring, useVideoConfig } from "remotion";
 import { C, cardStyle, easeOut, BgGrid, sp } from "./tokens";
 import { ClockIcon, WarningIcon, LightningIcon } from "./Icons";
+import { ThreeSoccerBall } from "./ThreeSoccerBall";
 
 const fi = (f: number, a: number, b: number, ea = 0, eb = 1) =>
   interpolate(f, [a, b], [ea, eb], {
@@ -527,7 +528,7 @@ export const HookScene: React.FC = () => {
             willChange: "transform",
           }}
         >
-          {/* Subtle soft stadium floor shadow under ball */}
+          {/* Subtle soft stadium floor shadow under 3D ball */}
           <div
             style={{
               position: "absolute",
@@ -535,115 +536,39 @@ export const HookScene: React.FC = () => {
               height: 64,
               borderRadius: "50%",
               background: "radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)",
-              filter: "blur(16px)",
-              transform: "translateY(200px)",
+              filter: "blur(18px)",
+              transform: "translateY(210px)",
               pointerEvents: "none",
             }}
           />
 
-          {/* Ambient Backlight Glow behind the ball */}
+          {/* Ambient Backlight Glow behind the 3D ball */}
           <div
             style={{
               position: "absolute",
               width: 440,
               height: 440,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(0, 255, 135, 0.35) 0%, rgba(0, 229, 255, 0.18) 45%, transparent 75%)",
-              filter: "blur(35px)",
+              background: "radial-gradient(circle, rgba(0, 255, 135, 0.3) 0%, rgba(0, 229, 255, 0.15) 45%, transparent 75%)",
+              filter: "blur(40px)",
               opacity: 0.8 + Math.sin(f * 0.1) * 0.2,
               pointerEvents: "none",
             }}
           />
 
-          {/* Concentric Pulse Shock Ring emitting behind the ball */}
+          {/* Dynamic Speed Streaks Beside the Ball */}
           <div
             style={{
               position: "absolute",
-              width: 420,
-              height: 420,
-              borderRadius: "50%",
-              border: `2px solid rgba(0, 255, 135, ${0.4 + Math.sin(f * 0.08) * 0.25})`,
-              boxShadow: "0 0 30px rgba(0, 255, 135, 0.3), inset 0 0 20px rgba(0, 255, 135, 0.2)",
-              transform: `scale(${1 + ((f * 0.015) % 0.25)})`,
-              opacity: 0.6 - ((f * 0.015) % 0.25) * 2,
-              pointerEvents: "none",
-            }}
-          />
-
-          {/* 3D Orbital Energy Ring 1 (Tilted Equator, rotating smoothly around the ball) */}
-          <div
-            style={{
-              position: "absolute",
-              width: 520,
-              height: 520,
-              borderRadius: "50%",
-              border: "2.5px dashed rgba(0, 255, 135, 0.75)",
-              boxShadow: "0 0 25px rgba(0, 255, 135, 0.6), inset 0 0 15px rgba(0, 255, 135, 0.3)",
-              transform: `rotateX(68deg) rotateY(-20deg) rotateZ(${f * 3.5}deg)`,
-              transformStyle: "preserve-3d",
-              pointerEvents: "none",
-            }}
-          >
-            {/* Glowing energy orb on orbit 1 */}
-            <div
-              style={{
-                position: "absolute",
-                top: -6,
-                left: "50%",
-                width: 14,
-                height: 14,
-                borderRadius: "50%",
-                background: "#00FF87",
-                boxShadow: "0 0 16px #00FF87, 0 0 30px #00FF87",
-                transform: "translateX(-50%)",
-              }}
-            />
-          </div>
-
-          {/* 3D Orbital Energy Ring 2 (Cross-Axis, rotating counter-clockwise) */}
-          <div
-            style={{
-              position: "absolute",
-              width: 480,
-              height: 480,
-              borderRadius: "50%",
-              border: "2px solid rgba(0, 229, 255, 0.6)",
-              borderTopColor: "transparent",
-              borderBottomColor: "rgba(0, 229, 255, 0.9)",
-              boxShadow: "0 0 25px rgba(0, 229, 255, 0.5)",
-              transform: `rotateX(72deg) rotateY(25deg) rotateZ(${-f * 4.2}deg)`,
-              transformStyle: "preserve-3d",
-              pointerEvents: "none",
-            }}
-          >
-            {/* Glowing cyan satellite marker on orbit 2 */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: -5,
-                left: "50%",
-                width: 12,
-                height: 12,
-                borderRadius: "50%",
-                background: "#00E5FF",
-                boxShadow: "0 0 15px #00E5FF, 0 0 25px #00E5FF",
-                transform: "translateX(-50%)",
-              }}
-            />
-          </div>
-
-          {/* Dynamic Speed Streaks / Cyber Data Streams Beside the Ball */}
-          <div
-            style={{
-              position: "absolute",
-              left: "100%",
-              top: "40%",
+              left: "85%",
+              top: "42%",
               display: "flex",
               flexDirection: "column",
               gap: 12,
               pointerEvents: "none",
               opacity: fi(f, 22, 35),
               transform: `translateX(${interpolate(Math.sin(f * 0.1), [-1, 1], [-5, 10])}px)`,
+              zIndex: 3,
             }}
           >
             <div
@@ -665,95 +590,22 @@ export const HookScene: React.FC = () => {
                 marginLeft: 15,
               }}
             />
-            <div
-              style={{
-                width: 70,
-                height: 2.5,
-                borderRadius: 2,
-                background: "linear-gradient(90deg, #FF4B4B 0%, rgba(255,75,75,0) 100%)",
-                boxShadow: "0 0 10px #FF4B4B",
-                marginLeft: -10,
-              }}
-            />
           </div>
 
-          {/* Floating Tech Reticle / Target Brackets around the Ball */}
-          <div
-            style={{
-              position: "absolute",
-              width: 420,
-              height: 420,
-              pointerEvents: "none",
-              opacity: fi(f, 20, 32),
-              transform: `rotate(${Math.sin(f * 0.04) * 3}deg)`,
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: 28,
-                height: 28,
-                borderTop: "2.5px solid rgba(0, 255, 135, 0.8)",
-                borderLeft: "2.5px solid rgba(0, 255, 135, 0.8)",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                width: 28,
-                height: 28,
-                borderTop: "2.5px solid rgba(0, 255, 135, 0.8)",
-                borderRight: "2.5px solid rgba(0, 255, 135, 0.8)",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                width: 28,
-                height: 28,
-                borderBottom: "2.5px solid rgba(0, 255, 135, 0.8)",
-                borderLeft: "2.5px solid rgba(0, 255, 135, 0.8)",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                width: 28,
-                height: 28,
-                borderBottom: "2.5px solid rgba(0, 255, 135, 0.8)",
-                borderRight: "2.5px solid rgba(0, 255, 135, 0.8)",
-              }}
-            />
-          </div>
-
-          {/* Crisp, Static 3D Premier League Match Ball - NO 2D ROTATION */}
+          {/* ── TRUE 3D WEBGL SOCCER BALL MODEL ── */}
           <div
             style={{
               position: "relative",
-              width: 380,
-              height: 380,
-              borderRadius: "50%",
-              transform: "rotate(-4deg)",
-              filter: "drop-shadow(0 25px 45px rgba(0,0,0,0.9)) drop-shadow(0 0 25px rgba(0,255,135,0.35))",
+              width: 460,
+              height: 460,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              filter: "drop-shadow(0 20px 40px rgba(0,0,0,0.85))",
               zIndex: 2,
             }}
           >
-            <Img
-              src={staticFile("soccer_ball.png")}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "contain",
-              }}
-            />
+            <ThreeSoccerBall size={460} />
           </div>
         </div>
 
