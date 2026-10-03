@@ -20,24 +20,24 @@ export const HookScene: React.FC = () => {
   const launchProgress = Math.min(Math.max(f / 18, 0), 1);
   const ballAccel = Math.pow(launchProgress, 2.6); // Aggressive rocket acceleration
 
-  // Scale: 0.12 (deep field) → 1.25 (impact lens) → settles to 0.58 floating beside text
+  // Scale: 0.10 (deep field) → 0.78 (impact lens) → settles to 0.38 floating beside text
   const ballScale = f < 18 
-    ? 0.12 + ballAccel * 1.13 
+    ? 0.10 + ballAccel * 0.68 
     : f < 30 
-      ? interpolate(f, [18, 30], [1.25, 0.58], { extrapolateRight: "clamp" })
-      : 0.58 + Math.sin(f * 0.08) * 0.02;
+      ? interpolate(f, [18, 30], [0.78, 0.38], { extrapolateRight: "clamp" })
+      : 0.38 + Math.sin(f * 0.08) * 0.015;
 
   const ballY = f < 18 
     ? interpolate(ballAccel, [0, 1], [180, 0])
     : f < 35 
-      ? interpolate(f, [18, 35], [0, -60], { extrapolateRight: "clamp" })
-      : -60 + Math.sin(f * 0.07) * 8;
+      ? interpolate(f, [18, 35], [0, -35], { extrapolateRight: "clamp" })
+      : -35 + Math.sin(f * 0.07) * 6;
 
   const ballX = f < 18 
     ? interpolate(ballAccel, [0, 1], [-80, 0])
     : f < 35 
-      ? interpolate(f, [18, 35], [0, -560], { extrapolateRight: "clamp" })
-      : -560 + Math.cos(f * 0.06) * 6;
+      ? interpolate(f, [18, 35], [0, -520], { extrapolateRight: "clamp" })
+      : -520 + Math.cos(f * 0.06) * 5;
 
   const ballSpin = 0; // Ball is completely static (no 2D disc rotation)
   const ballOpacity = f < 2 ? f * 0.5 : 1;
@@ -541,12 +541,12 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 260,
-              height: 52,
+              width: 200,
+              height: 42,
               borderRadius: "50%",
               background: "radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)",
-              filter: "blur(18px)",
-              transform: "translateY(175px)",
+              filter: "blur(14px)",
+              transform: "translateY(135px)",
               pointerEvents: "none",
             }}
           />
@@ -555,11 +555,11 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 520,
-              height: 520,
+              width: 400,
+              height: 400,
               borderRadius: "50%",
               background: "radial-gradient(circle, rgba(0, 255, 135, 0.35) 0%, rgba(0, 229, 255, 0.18) 45%, transparent 75%)",
-              filter: "blur(45px)",
+              filter: "blur(40px)",
               opacity: ballEffectsProgress * (0.85 + Math.sin(f * 0.1) * 0.15),
               pointerEvents: "none",
             }}
