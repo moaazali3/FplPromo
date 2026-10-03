@@ -42,6 +42,15 @@ export const HookScene: React.FC = () => {
   const ballSpin = 0; // Ball is completely static (no 2D disc rotation)
   const ballOpacity = f < 2 ? f * 0.5 : 1;
 
+  // Effects only appear AFTER ball strikes the screen at frame 18 and bounces back!
+  const ballEffectsProgress = f < 18
+    ? 0
+    : interpolate(f, [18, 30], [0, 1], {
+        extrapolateLeft: "clamp",
+        extrapolateRight: "clamp",
+        easing: easeOut,
+      });
+
   // ── 2. Screen Impact Shockwave & Violent Camera Shake (Frames 18 → 38) ──
   const impactHappened = f >= 18;
   const shockwaveProgress = Math.min(Math.max((f - 18) / 22, 0), 1);
@@ -542,21 +551,21 @@ export const HookScene: React.FC = () => {
             }}
           />
 
-          {/* Ambient Backlight Glow behind the 3D ball */}
+          {/* Ambient Backlight Glow behind the 3D ball (activates only after impact) */}
           <div
             style={{
               position: "absolute",
-              width: 440,
-              height: 440,
+              width: 500,
+              height: 500,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(0, 255, 135, 0.3) 0%, rgba(0, 229, 255, 0.15) 45%, transparent 75%)",
-              filter: "blur(40px)",
-              opacity: 0.8 + Math.sin(f * 0.1) * 0.2,
+              background: "radial-gradient(circle, rgba(0, 255, 135, 0.35) 0%, rgba(0, 229, 255, 0.18) 45%, transparent 75%)",
+              filter: "blur(45px)",
+              opacity: ballEffectsProgress * (0.85 + Math.sin(f * 0.1) * 0.15),
               pointerEvents: "none",
             }}
           />
 
-          {/* Dynamic Speed Streaks Beside the Ball */}
+          {/* Dynamic Speed Streaks Beside the Ball (activates only after impact) */}
           <div
             style={{
               position: "absolute",
@@ -566,7 +575,7 @@ export const HookScene: React.FC = () => {
               flexDirection: "column",
               gap: 12,
               pointerEvents: "none",
-              opacity: fi(f, 22, 35),
+              opacity: ballEffectsProgress * fi(f, 22, 35),
               transform: `translateX(${interpolate(Math.sin(f * 0.1), [-1, 1], [-5, 10])}px)`,
               zIndex: 3,
             }}
@@ -592,12 +601,12 @@ export const HookScene: React.FC = () => {
             />
           </div>
 
-          {/* ── TRUE 3D WEBGL SOCCER BALL MODEL ── */}
+          {/* ── TRUE 3D WEBGL SOCCER BALL MODEL (Unclipped 620px Canvas) ── */}
           <div
             style={{
               position: "relative",
-              width: 460,
-              height: 460,
+              width: 620,
+              height: 620,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -605,7 +614,7 @@ export const HookScene: React.FC = () => {
               zIndex: 2,
             }}
           >
-            <ThreeSoccerBall size={460} />
+            <ThreeSoccerBall size={620} effectsProgress={ballEffectsProgress} />
           </div>
         </div>
 
