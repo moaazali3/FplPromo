@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Outfit:wght@700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0B0E17;
+  color: #fff;
+  font-family: "Cairo", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(31, 36, 44, 0.85) 0%, rgba(20, 23, 29, 0.95) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 135, 0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 135, 0.15) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
