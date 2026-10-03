@@ -20,12 +20,12 @@ export const HookScene: React.FC = () => {
   const launchProgress = Math.min(Math.max(f / 18, 0), 1);
   const ballAccel = Math.pow(launchProgress, 2.6); // Aggressive rocket acceleration
 
-  // Scale: 0.12 (deep field) → 1.25 (impact lens) → settles to 0.78 floating beside text
+  // Scale: 0.12 (deep field) → 1.25 (impact lens) → settles to 0.58 floating beside text
   const ballScale = f < 18 
     ? 0.12 + ballAccel * 1.13 
     : f < 30 
-      ? interpolate(f, [18, 30], [1.25, 0.76], { extrapolateRight: "clamp" })
-      : 0.76 + Math.sin(f * 0.08) * 0.025;
+      ? interpolate(f, [18, 30], [1.25, 0.58], { extrapolateRight: "clamp" })
+      : 0.58 + Math.sin(f * 0.08) * 0.02;
 
   const ballY = f < 18 
     ? interpolate(ballAccel, [0, 1], [180, 0])
@@ -541,12 +541,12 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 320,
-              height: 64,
+              width: 260,
+              height: 52,
               borderRadius: "50%",
               background: "radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)",
               filter: "blur(18px)",
-              transform: "translateY(210px)",
+              transform: "translateY(175px)",
               pointerEvents: "none",
             }}
           />
@@ -555,8 +555,8 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 500,
-              height: 500,
+              width: 520,
+              height: 520,
               borderRadius: "50%",
               background: "radial-gradient(circle, rgba(0, 255, 135, 0.35) 0%, rgba(0, 229, 255, 0.18) 45%, transparent 75%)",
               filter: "blur(45px)",
@@ -569,7 +569,7 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              left: "85%",
+              left: "82%",
               top: "42%",
               display: "flex",
               flexDirection: "column",
@@ -601,12 +601,12 @@ export const HookScene: React.FC = () => {
             />
           </div>
 
-          {/* ── TRUE 3D WEBGL SOCCER BALL MODEL (Unclipped 620px Canvas) ── */}
+          {/* ── TRUE 3D WEBGL SOCCER BALL MODEL (Unclipped 780px Canvas) ── */}
           <div
             style={{
               position: "relative",
-              width: 620,
-              height: 620,
+              width: 780,
+              height: 780,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -614,7 +614,7 @@ export const HookScene: React.FC = () => {
               zIndex: 2,
             }}
           >
-            <ThreeSoccerBall size={620} effectsProgress={ballEffectsProgress} />
+            <ThreeSoccerBall size={780} effectsProgress={ballEffectsProgress} />
           </div>
         </div>
 

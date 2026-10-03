@@ -9,7 +9,7 @@ interface ThreeSoccerBallProps {
 }
 
 export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
-  size = 620,
+  size = 780,
   effectsProgress = 1,
   style,
 }) => {
@@ -46,9 +46,9 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
     renderer.setSize(size, size);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
-    // 2. Perspective Camera with ample margin (prevents any ring clipping)
-    const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 1000);
-    camera.position.z = 4.8;
+    // 2. Perspective Camera with generous padding so rings NEVER clip
+    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 1000);
+    camera.position.z = 5.2;
 
     // 3. Dynamic Studio Lighting for Deep 3D Specular Relief
     const scene = new THREE.Scene();
