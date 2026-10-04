@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame, interpolate, Sequence } from "remotion";
+import { AbsoluteFill, useCurrentFrame, interpolate, Sequence, Audio, staticFile } from "remotion";
 import { HookScene } from "./HookScene";
 import { RevealSceneV2 } from "./v2/RevealSceneV2";
 import { PitchViewSceneV2 } from "./v2/PitchViewSceneV2";
@@ -94,6 +94,40 @@ const TransitionWipeOverlay: React.FC = () => {
 export const FplScoutAdV2: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: C.midnight }}>
+      {/* ── 1. Dynamic Master BGM Track (Siege Cinematic) ── */}
+      <Audio
+        src={staticFile("audio/bgm_siege.mp3")}
+        volume={(f) =>
+          interpolate(f, [0, 20, 940, 980], [0, 0.45, 0.45, 0], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+          })
+        }
+      />
+
+      {/* ── 2. Impact Sound Effect: Soccer Ball Smash at Frame 18 ── */}
+      <Sequence from={18} durationInFrames={60}>
+        <Audio src={staticFile("audio/sfx_impact.wav")} volume={0.85} />
+      </Sequence>
+
+      {/* ── 3. Electric Orbital Rings Activation at Frame 20 ── */}
+      <Sequence from={20} durationInFrames={45}>
+        <Audio src={staticFile("audio/sfx_electric.wav")} volume={0.5} />
+      </Sequence>
+
+      {/* ── 4. Scene Transition Laser Whooshes ── */}
+      {SEAMS.map((seam) => (
+        <Sequence key={seam} from={seam - 6} durationInFrames={35}>
+          <Audio src={staticFile("audio/sfx_whoosh.wav")} volume={0.4} />
+        </Sequence>
+      ))}
+
+      {/* ── 5. Victory Celebration Fanfare in CTA Scene (Frame 880) ── */}
+      <Sequence from={880} durationInFrames={100}>
+        <Audio src={staticFile("audio/sfx_victory.mp3")} volume={0.7} />
+      </Sequence>
+
+      {/* Visual Scenes */}
       {SCENES_V2.map(({ id, start, dur, Component }) => (
         <Sequence key={id} from={start} durationInFrames={dur}>
           <Component />
@@ -104,3 +138,4 @@ export const FplScoutAdV2: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
