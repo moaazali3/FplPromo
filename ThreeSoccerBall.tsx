@@ -47,8 +47,8 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
     // 2. Perspective Camera with generous padding so rings NEVER clip
-    const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 1000);
-    camera.position.z = 5.2;
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 1000);
+    camera.position.z = 6.2;
 
     // 3. Dynamic Studio Lighting for Deep 3D Specular Relief
     const scene = new THREE.Scene();
@@ -84,7 +84,13 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
     const textureUrl = staticFile("soccer_ball_hd.jpg");
     const bumpUrl = staticFile("extracted_texture.jpg");
 
-    const sphereGeo = new THREE.SphereGeometry(1.22, 64, 64);
+    // Sized comfortably so ball and all cyber rings remain fully inside viewport bounds
+    const BALL_RADIUS = 0.96;
+    const RING1_RADIUS = 1.32;
+    const RING2_RADIUS = 1.48;
+    const RING3_RADIUS = 1.62;
+
+    const sphereGeo = new THREE.SphereGeometry(BALL_RADIUS, 64, 64);
 
     textureLoader.load(
       textureUrl,
@@ -123,7 +129,7 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
 
           // ── Stronger, Electric 3D Gyroscopic Orbital Rings ──
           // Ring 1: Neon Green Equator Ring (with thick emissive core)
-          const ring1Geo = new THREE.TorusGeometry(1.72, 0.026, 16, 120);
+          const ring1Geo = new THREE.TorusGeometry(RING1_RADIUS, 0.022, 16, 120);
           const ring1Mat = new THREE.MeshStandardMaterial({
             color: 0x00ff87,
             emissive: 0x00ff87,
@@ -136,7 +142,7 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
           effectsGroup.add(ring1);
 
           // Ring 2: Cyan Cross-Axis Ring
-          const ring2Geo = new THREE.TorusGeometry(1.92, 0.022, 16, 120);
+          const ring2Geo = new THREE.TorusGeometry(RING2_RADIUS, 0.018, 16, 120);
           const ring2Mat = new THREE.MeshStandardMaterial({
             color: 0x00e5ff,
             emissive: 0x00e5ff,
@@ -150,7 +156,7 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
           effectsGroup.add(ring2);
 
           // Ring 3: Outer Horizon Holographic Ring
-          const ring3Geo = new THREE.TorusGeometry(2.1, 0.012, 16, 120);
+          const ring3Geo = new THREE.TorusGeometry(RING3_RADIUS, 0.011, 16, 120);
           const ring3Mat = new THREE.MeshBasicMaterial({
             color: 0x00ff87,
             transparent: true,
@@ -162,7 +168,7 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
           effectsGroup.add(ring3);
 
           // Orbiting Satellites / Energy Beacons
-          const satGeo = new THREE.SphereGeometry(0.09, 16, 16);
+          const satGeo = new THREE.SphereGeometry(0.065, 16, 16);
           const sat1Mat = new THREE.MeshBasicMaterial({ color: 0x00ff87 });
           const satellite1 = new THREE.Mesh(satGeo, sat1Mat);
           effectsGroup.add(satellite1);
@@ -222,16 +228,16 @@ export const ThreeSoccerBall: React.FC<ThreeSoccerBallProps> = ({
       ring2.rotation.z = -f * 0.042;
       ring3.rotation.z = f * 0.025;
 
-      // Satellite 1 orbiting on ring 1
+      // Satellite 1 orbiting on ring 1 (scaled radius 1.32)
       const sat1Angle = f * 0.052;
-      const r1 = 1.72;
+      const r1 = 1.32;
       satellite1.position.x = Math.cos(sat1Angle) * r1;
       satellite1.position.y = Math.sin(sat1Angle) * r1 * Math.cos(Math.PI / 2.7);
       satellite1.position.z = Math.sin(sat1Angle) * r1 * Math.sin(Math.PI / 2.7);
 
-      // Satellite 2 orbiting on ring 2
+      // Satellite 2 orbiting on ring 2 (scaled radius 1.48)
       const sat2Angle = -f * 0.045 + Math.PI;
-      const r2 = 1.92;
+      const r2 = 1.48;
       satellite2.position.x = Math.cos(sat2Angle) * r2 * Math.cos(Math.PI / 5);
       satellite2.position.y = Math.sin(sat2Angle) * r2 * Math.cos(-Math.PI / 3.2);
       satellite2.position.z = Math.sin(sat2Angle) * r2 * Math.sin(-Math.PI / 3.2);

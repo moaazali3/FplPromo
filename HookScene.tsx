@@ -20,12 +20,12 @@ export const HookScene: React.FC = () => {
   const launchProgress = Math.min(Math.max(f / 18, 0), 1);
   const ballAccel = Math.pow(launchProgress, 2.6); // Aggressive rocket acceleration
 
-  // Scale: 0.10 (deep field) → 0.78 (impact lens) → settles to 0.38 floating beside text
+  // Scale: 0.10 (deep field) → 0.72 (impact lens) → settles to 0.33 floating beside text
   const ballScale = f < 18 
-    ? 0.10 + ballAccel * 0.68 
+    ? 0.10 + ballAccel * 0.62 
     : f < 30 
-      ? interpolate(f, [18, 30], [0.78, 0.38], { extrapolateRight: "clamp" })
-      : 0.38 + Math.sin(f * 0.08) * 0.015;
+      ? interpolate(f, [18, 30], [0.72, 0.33], { extrapolateRight: "clamp" })
+      : 0.33 + Math.sin(f * 0.08) * 0.012;
 
   const ballY = f < 18 
     ? interpolate(ballAccel, [0, 1], [180, 0])
@@ -36,8 +36,8 @@ export const HookScene: React.FC = () => {
   const ballX = f < 18 
     ? interpolate(ballAccel, [0, 1], [-80, 0])
     : f < 35 
-      ? interpolate(f, [18, 35], [0, -520], { extrapolateRight: "clamp" })
-      : -520 + Math.cos(f * 0.06) * 5;
+      ? interpolate(f, [18, 35], [0, -535], { extrapolateRight: "clamp" })
+      : -535 + Math.cos(f * 0.06) * 5;
 
   const ballSpin = 0; // Ball is completely static (no 2D disc rotation)
   const ballOpacity = f < 2 ? f * 0.5 : 1;
@@ -541,12 +541,12 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 200,
-              height: 42,
+              width: 180,
+              height: 36,
               borderRadius: "50%",
               background: "radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%)",
               filter: "blur(14px)",
-              transform: "translateY(135px)",
+              transform: "translateY(115px)",
               pointerEvents: "none",
             }}
           />
@@ -555,8 +555,8 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              width: 400,
-              height: 400,
+              width: 350,
+              height: 350,
               borderRadius: "50%",
               background: "radial-gradient(circle, rgba(0, 255, 135, 0.35) 0%, rgba(0, 229, 255, 0.18) 45%, transparent 75%)",
               filter: "blur(40px)",
@@ -569,7 +569,7 @@ export const HookScene: React.FC = () => {
           <div
             style={{
               position: "absolute",
-              left: "82%",
+              left: "76%",
               top: "42%",
               display: "flex",
               flexDirection: "column",
