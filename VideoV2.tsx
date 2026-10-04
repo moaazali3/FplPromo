@@ -107,24 +107,7 @@ export const FplScoutAdV2: React.FC = () => {
 
       {/* ── 2. Impact Sound Effect: Soccer Ball Smash at Frame 18 ── */}
       <Sequence from={18} durationInFrames={60}>
-        <Audio src={staticFile("audio/sfx_impact.wav")} volume={0.85} />
-      </Sequence>
-
-      {/* ── 3. Electric Orbital Rings Activation at Frame 20 ── */}
-      <Sequence from={20} durationInFrames={45}>
-        <Audio src={staticFile("audio/sfx_electric.wav")} volume={0.5} />
-      </Sequence>
-
-      {/* ── 4. Scene Transition Laser Whooshes ── */}
-      {SEAMS.map((seam) => (
-        <Sequence key={seam} from={seam - 6} durationInFrames={35}>
-          <Audio src={staticFile("audio/sfx_whoosh.wav")} volume={0.4} />
-        </Sequence>
-      ))}
-
-      {/* ── 5. Victory Celebration Fanfare in CTA Scene (Frame 880) ── */}
-      <Sequence from={880} durationInFrames={100}>
-        <Audio src={staticFile("audio/sfx_victory.mp3")} volume={0.7} />
+        <Audio src={staticFile("audio/sfx_impact.wav")} volume={0.8} />
       </Sequence>
 
       {/* Visual Scenes */}
