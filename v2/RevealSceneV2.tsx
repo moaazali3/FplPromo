@@ -44,8 +44,8 @@ export const RevealSceneV2: React.FC = () => {
   const circleProgress1 = fi(f, 24, 65);
   const circleProgress2 = fi(f, 32, 70);
 
-  // Camera zoom
-  const camZoom = 1.0 + (f / 130) * 0.035;
+  // Stable camera (no zoom distortion)
+  const camZoom = 1.0;
 
   return (
     <AbsoluteFill style={{ background: C.midnight, overflow: "hidden" }}>
@@ -128,7 +128,7 @@ export const RevealSceneV2: React.FC = () => {
             style={{
               fontFamily: "Outfit, Cairo, sans-serif",
               fontWeight: 900,
-              fontSize: 54,
+              fontSize: 52,
               color: "#FFFFFF",
               letterSpacing: -1,
               marginTop: 6,
@@ -148,17 +148,17 @@ export const RevealSceneV2: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "80px 70px 40px 70px",
+            padding: "80px 90px 40px 90px",
             zIndex: 20,
           }}
         >
           {/* ── LEFT OPPOSING WING: Dynamic Sliding Elements (From Left) ── */}
           <div
             style={{
-              width: 380,
+              width: 410,
               display: "flex",
               flexDirection: "column",
-              gap: 20,
+              gap: 18,
               opacity: leftOp,
               transform: `translateX(${leftX}px)`,
             }}
@@ -167,12 +167,12 @@ export const RevealSceneV2: React.FC = () => {
             <div
               style={{
                 ...cardStyle({
-                  padding: "18px 24px",
+                  padding: "16px 20px",
                   borderColor: "rgba(0, 255, 135, 0.45)",
                 }),
                 display: "flex",
                 alignItems: "center",
-                gap: 18,
+                gap: 16,
                 boxShadow: "0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(0,255,135,0.2)",
               }}
             >
@@ -182,10 +182,11 @@ export const RevealSceneV2: React.FC = () => {
                 color={C.neonGreen}
                 unit="+"
                 label="xP BOOST"
-                size={110}
+                size={95}
+                strokeWidth={7}
               />
-              <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
-                <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 18, color: "#FFFFFF" }}>
+              <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
+                <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 17, color: "#FFFFFF" }}>
                   فارق نقاط الجولة
                 </span>
                 <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 13, color: "#94A3B8", marginTop: 4 }}>
@@ -294,10 +295,10 @@ export const RevealSceneV2: React.FC = () => {
           {/* ── RIGHT OPPOSING WING: Dynamic Sliding Elements (From Right) ── */}
           <div
             style={{
-              width: 380,
+              width: 410,
               display: "flex",
               flexDirection: "column",
-              gap: 20,
+              gap: 18,
               opacity: rightOp,
               transform: `translateX(${rightX}px)`,
             }}
@@ -306,12 +307,12 @@ export const RevealSceneV2: React.FC = () => {
             <div
               style={{
                 ...cardStyle({
-                  padding: "18px 24px",
+                  padding: "16px 20px",
                   borderColor: "rgba(255, 184, 0, 0.45)",
                 }),
                 display: "flex",
                 alignItems: "center",
-                gap: 18,
+                gap: 16,
                 boxShadow: "0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(255,184,0,0.2)",
               }}
             >
@@ -321,10 +322,11 @@ export const RevealSceneV2: React.FC = () => {
                 color={C.futGoldLight}
                 unit="%"
                 label="ROI VALUE"
-                size={110}
+                size={95}
+                strokeWidth={7}
               />
-              <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
-                <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 18, color: "#FFFFFF" }}>
+              <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
+                <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 17, color: "#FFFFFF" }}>
                   كفاءة الصفقات والميزانية
                 </span>
                 <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 13, color: "#94A3B8", marginTop: 4 }}>

@@ -21,7 +21,7 @@ export const PitchViewSceneV2: React.FC = () => {
   const rotateY = interpolate(frame, [0, 120], [-12, -4], { extrapolateRight: "clamp" });
   const rotateX = interpolate(frame, [0, 120], [14, 8], { extrapolateRight: "clamp" });
   const floatY = Math.sin(frame * 0.05) * 8;
-  const camZoom = 1.0 + (frame / 120) * 0.035;
+  const camZoom = 1.0;
 
   // Header Title timing
   const titleOpacity = interpolate(frame, [6, 20], [0, 1], { extrapolateRight: "clamp" });
@@ -116,9 +116,9 @@ export const PitchViewSceneV2: React.FC = () => {
         <div
           style={{
             position: "absolute",
-            left: 70,
+            left: 80,
             top: "22%",
-            width: 360,
+            width: 380,
             display: "flex",
             flexDirection: "column",
             gap: 18,
@@ -146,9 +146,10 @@ export const PitchViewSceneV2: React.FC = () => {
               color="#00FF85"
               unit="xP"
               label="PROJECTED"
-              size={105}
+              size={95}
+              strokeWidth={7}
             />
-            <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
+            <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
               <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 17, color: "#FFFFFF" }}>
                 أعلى سقف نقاط متوقع
               </span>
@@ -233,9 +234,9 @@ export const PitchViewSceneV2: React.FC = () => {
         <div
           style={{
             position: "absolute",
-            right: 70,
+            right: 80,
             top: "22%",
-            width: 360,
+            width: 380,
             display: "flex",
             flexDirection: "column",
             gap: 18,
@@ -275,7 +276,7 @@ export const PitchViewSceneV2: React.FC = () => {
             >
               C
             </div>
-            <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
+            <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
               <span style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: 18, color: "#FFD700" }}>
                 HAALAND (C) LOCKED
               </span>

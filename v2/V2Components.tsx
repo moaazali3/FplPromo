@@ -23,93 +23,122 @@ export const CircularMetricGauge: React.FC<{
   pulse = true,
 }) => {
   const f = useCurrentFrame();
-  const radius = (size - strokeWidth * 2) / 2;
+  const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const currentVal = Math.round(value * progress);
   const strokeDashoffset = circumference - (circumference * (value * progress)) / 100;
-  const pulseScale = pulse ? 1 + Math.sin(f * 0.12) * 0.025 : 1;
+  const pulseScale = pulse ? 1 + Math.sin(f * 0.12) * 0.02 : 1;
 
   return (
     <div
       style={{
-        width: size,
-        height: size,
-        position: "relative",
-        display: "flex",
+        display: "inline-flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        transform: `scale(${pulseScale})`,
+        flexShrink: 0,
       }}
     >
-      <svg
-        width={size}
-        height={size}
-        style={{ transform: "rotate(-90deg)", position: "absolute", inset: 0 }}
-      >
-        {/* Track */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke="rgba(255, 255, 255, 0.08)"
-          strokeWidth={strokeWidth}
-          fill="none"
-        />
-        {/* Progress Arc */}
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={radius}
-          stroke={color}
-          strokeWidth={strokeWidth}
-          strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-          strokeLinecap="round"
-          fill="none"
-          style={{
-            filter: `drop-shadow(0 0 12px ${color})`,
-          }}
-        />
-      </svg>
-
       <div
         style={{
+          width: size,
+          height: size,
+          position: "relative",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          textAlign: "center",
-          zIndex: 2,
+          transform: `scale(${pulseScale})`,
+          flexShrink: 0,
         }}
       >
-        <span
+        <svg
+          width={size}
+          height={size}
+          style={{ transform: "rotate(-90deg)", position: "absolute", inset: 0 }}
+        >
+          {/* Track */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke="rgba(255, 255, 255, 0.08)"
+            strokeWidth={strokeWidth}
+            fill="none"
+          />
+          {/* Progress Arc */}
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            stroke={color}
+            strokeWidth={strokeWidth}
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            fill="none"
+            style={{
+              filter: `drop-shadow(0 0 12px ${color})`,
+            }}
+          />
+        </svg>
+
+        {/* Center Number & Unit Only - Exact Dead Center */}
+        <div
           style={{
-            fontFamily: "Outfit, sans-serif",
-            fontWeight: 900,
-            fontSize: size * 0.28,
-            color: "#FFFFFF",
+            position: "relative",
+            zIndex: 2,
+            display: "flex",
+            alignItems: "baseline",
+            justifyContent: "center",
             lineHeight: 1,
-            textShadow: `0 0 15px ${color}`,
           }}
         >
-          {currentVal}
-          <span style={{ fontSize: size * 0.18, color }}>{unit}</span>
-        </span>
-        {label && (
           <span
             style={{
-              fontFamily: "Cairo, sans-serif",
-              fontWeight: 800,
-              fontSize: size * 0.12,
-              color: "#94A3B8",
-              marginTop: 2,
-              letterSpacing: 0.5,
+              fontFamily: "Outfit, sans-serif",
+              fontWeight: 900,
+              fontSize: Math.round(size * 0.32),
+              color: "#FFFFFF",
+              letterSpacing: -1,
+              textShadow: `0 0 15px ${color}`,
             }}
           >
-            {label}
+            {currentVal}
           </span>
-        )}
+          {unit && (
+            <span
+              style={{
+                fontFamily: "Outfit, sans-serif",
+                fontWeight: 800,
+                fontSize: Math.round(size * 0.18),
+                color,
+                marginLeft: 2,
+              }}
+            >
+              {unit}
+            </span>
+          )}
+        </div>
       </div>
+
+      {label && (
+        <div
+          style={{
+            fontFamily: "Outfit, Cairo, sans-serif",
+            fontWeight: 800,
+            fontSize: Math.max(10, Math.round(size * 0.11)),
+            color: "#94A3B8",
+            marginTop: 5,
+            letterSpacing: 0.6,
+            lineHeight: 1.1,
+            whiteSpace: "nowrap",
+            textAlign: "center",
+            textTransform: "uppercase",
+          }}
+        >
+          {label}
+        </div>
+      )}
     </div>
   );
 };
@@ -282,79 +311,5 @@ export const StatCube: React.FC<{
   );
 };
 
-// ── 4. High-Octane Commercial Ticker Bar ──
-export const CommercialTicker: React.FC<{
-  items?: string[];
-}> = ({
-  items = [
-    "🔥 GW28 DEADLINE INCOMING",
-    "⚡ 11.4M MANAGERS LOCKING PICKS",
-    "🎯 AI SCOUT PICKS: +42.6 PROJECTED PTS",
-    "👑 CAPTAIN LOCKED: HAALAND (xP: 11.8)",
-    "💎 DIFFERENTIAL PICK: PALMER (9.2% TSB)",
-    "🛡️ WILDCARD TIMING ENGINE ACTIVE",
-  ],
-}) => {
-  const f = useCurrentFrame();
-  const offset = (f * 3.5) % 1800;
-
-  return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: 38,
-        background: "rgba(5, 7, 10, 0.94)",
-        borderTop: "1.5px solid rgba(0, 255, 135, 0.35)",
-        display: "flex",
-        alignItems: "center",
-        overflow: "hidden",
-        zIndex: 50,
-      }}
-    >
-      <div
-        style={{
-          background: C.neonGreen,
-          color: "#05070A",
-          fontFamily: "Outfit, sans-serif",
-          fontWeight: 900,
-          fontSize: 12,
-          padding: "0 18px",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          flexShrink: 0,
-          letterSpacing: 1.5,
-          boxShadow: "0 0 20px #00FF87",
-        }}
-      >
-        <span>LIVE SCOUT RADAR</span>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          whiteSpace: "nowrap",
-          transform: `translateX(-${offset}px)`,
-          gap: 48,
-          alignItems: "center",
-          fontFamily: "Outfit, Cairo, sans-serif",
-          fontSize: 13,
-          fontWeight: 800,
-          color: "#CBD5E1",
-          letterSpacing: 1,
-        }}
-      >
-        {[...items, ...items, ...items].map((text, i) => (
-          <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
-            <span>{text}</span>
-            <span style={{ color: C.neonGreen }}>✦</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// ── 4. Commercial Ticker Bar (Removed per user directive to eliminate bottom clutter and distortion) ──
+export const CommercialTicker: React.FC<{ items?: string[] }> = () => null;

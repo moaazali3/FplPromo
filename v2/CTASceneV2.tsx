@@ -43,7 +43,7 @@ export const CTASceneV2: React.FC = () => {
   const pulseOp1 = 1 - ((f * 0.08) % 1);
 
   const glow = 0.7 + Math.sin(f * 0.15) * 0.3;
-  const camZoom = 1.0 + (f / 100) * 0.03;
+  const camZoom = 1.0;
 
   return (
     <AbsoluteFill

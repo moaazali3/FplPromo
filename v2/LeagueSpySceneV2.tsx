@@ -21,7 +21,7 @@ export const LeagueSpySceneV2: React.FC = () => {
   const rotateY = interpolate(frame, [0, 110], [-10, 8], { extrapolateRight: "clamp" });
   const rotateX = interpolate(frame, [0, 110], [10, 12], { extrapolateRight: "clamp" });
   const floatY = Math.sin(frame * 0.05 + 2) * 8;
-  const camZoom = 1.0 + (frame / 110) * 0.035;
+  const camZoom = 1.0;
 
   // Header Title timing
   const titleOpacity = interpolate(frame, [6, 20], [0, 1], { extrapolateRight: "clamp" });
@@ -283,8 +283,8 @@ export const LeagueSpySceneV2: React.FC = () => {
               <WarningIcon size={28} color="#FF4B4B" />
             </div>
             <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
-              <span style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: 18, color: "#FF4B4B" }}>
-                BENCH BOOST ACTIVE!
+              <span dir="ltr" style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: 18, color: "#FF4B4B", textAlign: "right" }}>
+                BENCH BOOST ACTIVE
               </span>
               <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 13, color: "#FFFFFF", fontWeight: 800 }}>
                 المنافس استخدم خواص الجولة
@@ -310,8 +310,8 @@ export const LeagueSpySceneV2: React.FC = () => {
               progress={winProg}
               color="#FFD700"
               unit="%"
-              label="WIN PROBABILITY"
-              size={95}
+              label="WIN PROB"
+              size={90}
               strokeWidth={7}
             />
             <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>

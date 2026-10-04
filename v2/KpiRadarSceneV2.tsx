@@ -39,7 +39,7 @@ export const KpiRadarSceneV2: React.FC = () => {
   const gaugeProg1 = fi(f, 22, 60);
   const gaugeProg2 = fi(f, 28, 65);
 
-  const camZoom = 1.0 + (f / 135) * 0.032;
+  const camZoom = 1.0;
 
   const haalandKpis: PlayerKpis = {
     bpsMagnet: 98,
@@ -168,8 +168,8 @@ export const KpiRadarSceneV2: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "80px 60px 40px 60px",
-            gap: 40,
+            padding: "80px 40px 40px 40px",
+            gap: 28,
             zIndex: 20,
           }}
         >
@@ -178,7 +178,7 @@ export const KpiRadarSceneV2: React.FC = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: 24,
+              gap: 20,
               opacity: leftOp,
               transform: `translateX(${leftX}px)`,
             }}
@@ -201,34 +201,36 @@ export const KpiRadarSceneV2: React.FC = () => {
             {/* Radar & Circular Gauges Column */}
             <div
               style={{
+                width: 290,
+                boxSizing: "border-box",
                 ...cardStyle({
-                  padding: "18px 22px",
+                  padding: "16px 18px",
                   borderColor: "rgba(124, 92, 255, 0.45)",
                 }),
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 14,
+                gap: 12,
                 boxShadow: "0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(124,92,255,0.2)",
               }}
             >
-              <RadarKpiChart kpis={haalandKpis} color="#7C5CFF" size={170} delay={12} />
+              <RadarKpiChart kpis={haalandKpis} color="#7C5CFF" size={160} delay={12} />
               
-              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center", width: "100%", justifyContent: "center" }}>
                 <CircularMetricGauge
                   value={98}
                   progress={gaugeProg1}
                   color="#7C5CFF"
                   unit="%"
                   label="BPS MAGNET"
-                  size={85}
+                  size={80}
                   strokeWidth={6}
                 />
-                <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
-                  <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 16, color: "#FFFFFF" }}>
+                <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
+                  <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 15, color: "#FFFFFF" }}>
                     مغناطيس بونص
                   </span>
-                  <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 12, color: "#A78BFA" }}>
+                  <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 11, color: "#A78BFA" }}>
                     خيار كابتن مضمون الجولة
                   </span>
                 </div>
@@ -314,34 +316,36 @@ export const KpiRadarSceneV2: React.FC = () => {
             {/* Radar & Circular Gauges Column */}
             <div
               style={{
+                width: 290,
+                boxSizing: "border-box",
                 ...cardStyle({
-                  padding: "18px 22px",
+                  padding: "16px 18px",
                   borderColor: "rgba(255, 215, 0, 0.45)",
                 }),
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: 14,
+                gap: 12,
                 boxShadow: "0 15px 35px rgba(0,0,0,0.6), 0 0 30px rgba(255,215,0,0.2)",
               }}
             >
-              <RadarKpiChart kpis={palmerKpis} color="#FFD700" size={170} delay={16} />
+              <RadarKpiChart kpis={palmerKpis} color="#FFD700" size={160} delay={16} />
               
-              <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+              <div style={{ display: "flex", gap: 12, alignItems: "center", width: "100%", justifyContent: "center" }}>
                 <CircularMetricGauge
                   value={96}
                   progress={gaugeProg2}
                   color="#FFD700"
                   unit="%"
                   label="ROI VALUE"
-                  size={85}
+                  size={80}
                   strokeWidth={6}
                 />
-                <div style={{ display: "flex", flexDirection: "column", direction: "rtl" }}>
-                  <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 16, color: "#FFFFFF" }}>
+                <div style={{ display: "flex", flexDirection: "column", direction: "rtl", flex: 1 }}>
+                  <span style={{ fontFamily: "Cairo, sans-serif", fontWeight: 900, fontSize: 15, color: "#FFFFFF" }}>
                     عائد استثماري خيالي
                   </span>
-                  <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 12, color: "#FFD700" }}>
+                  <span style={{ fontFamily: "Cairo, sans-serif", fontSize: 11, color: "#FFD700" }}>
                     أفضل صفقة سعر مقابل نقاط
                   </span>
                 </div>

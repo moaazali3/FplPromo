@@ -37,7 +37,7 @@ export const FeatureSceneV2: React.FC = () => {
   const stampScale = interpolate(Math.min(stampSpring, 1), [0, 1], [0.2, 1]);
   const stampOp = fi(f, 24, 30);
 
-  const camZoom = 1.0 + (f / 120) * 0.032;
+  const camZoom = 1.0;
 
   return (
     <AbsoluteFill
@@ -240,12 +240,14 @@ export const FeatureSceneV2: React.FC = () => {
             <div
               style={{
                 position: "absolute",
-                width: 210,
-                height: 210,
+                top: 0,
+                width: 170,
+                height: 170,
                 borderRadius: "50%",
-                border: "2px dashed rgba(255, 75, 75, 0.5)",
+                border: "2px dashed rgba(255, 75, 75, 0.45)",
                 transform: `rotate(${f * 1.2}deg)`,
-                boxShadow: "0 0 35px rgba(255,75,75,0.3)",
+                boxShadow: "0 0 30px rgba(255,75,75,0.25)",
+                pointerEvents: "none",
               }}
             />
 
@@ -255,14 +257,14 @@ export const FeatureSceneV2: React.FC = () => {
               color="#FF4B4B"
               unit="%"
               label="DIFFERENTIAL RISK"
-              size={160}
-              strokeWidth={11}
+              size={140}
+              strokeWidth={10}
             />
 
             {/* Differential Slam Stamp */}
             <div
               style={{
-                marginTop: 18,
+                marginTop: 14,
                 opacity: stampOp,
                 transform: `scale(${stampScale}) rotate(-4deg)`,
                 padding: "6px 16px",

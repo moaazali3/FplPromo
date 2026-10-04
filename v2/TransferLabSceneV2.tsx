@@ -41,7 +41,7 @@ export const TransferLabSceneV2: React.FC = () => {
   const wcOp = fi(f, 32, 42);
 
   const gainProgress = fi(f, 24, 60);
-  const camZoom = 1.0 + (f / 135) * 0.032;
+  const camZoom = 1.0;
 
   return (
     <AbsoluteFill
@@ -171,10 +171,10 @@ export const TransferLabSceneV2: React.FC = () => {
           >
             <div style={{ filter: "drop-shadow(0 20px 40px rgba(255,75,75,0.4))" }}>
               <FutCard
-                name="Watkins"
-                team="AVL"
-                position="FWD"
-                photo="silhouette"
+                name="B. Fernandes"
+                team="MUN"
+                position="MID"
+                photo="bruno"
                 tier="gold"
                 rating={85}
                 bgt={78}
@@ -262,38 +262,37 @@ export const TransferLabSceneV2: React.FC = () => {
               opacity: swapOp,
               transform: `scale(${swapScale})`,
               zIndex: 35,
+              gap: 10,
             }}
           >
             {/* Spinning Swap Ring */}
             <div
               style={{
-                width: 90,
-                height: 90,
+                width: 72,
+                height: 72,
                 borderRadius: "50%",
                 background: "linear-gradient(135deg, #16181D 0%, #0B0F0D 100%)",
-                border: "2.5px solid #00FF87",
-                boxShadow: "0 0 35px rgba(0,255,135,0.6)",
+                border: "2px solid #00FF87",
+                boxShadow: "0 0 25px rgba(0,255,135,0.6)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 transform: `rotate(${swapRot}deg)`,
               }}
             >
-              <TransferSwapIcon size={42} color="#00FF87" />
+              <TransferSwapIcon size={34} color="#00FF87" />
             </div>
 
             {/* Circular Metric Gain */}
-            <div style={{ marginTop: 14 }}>
-              <CircularMetricGauge
-                value={14}
-                progress={gainProgress}
-                color="#00FF87"
-                unit="+"
-                label="NET PTS GAIN"
-                size={95}
-                strokeWidth={7}
-              />
-            </div>
+            <CircularMetricGauge
+              value={14}
+              progress={gainProgress}
+              color="#00FF87"
+              unit="+"
+              label="NET GAIN"
+              size={84}
+              strokeWidth={6}
+            />
           </div>
 
           {/* ── INCOMING PLAYER (BUY: Green Neon) ── */}
@@ -375,15 +374,15 @@ export const TransferLabSceneV2: React.FC = () => {
 
             <div style={{ filter: "drop-shadow(0 20px 40px rgba(0,255,135,0.4))" }}>
               <FutCard
-                name="Isak"
-                team="NEW"
-                position="FWD"
-                photo="silhouette"
+                name="Saka"
+                team="ARS"
+                position="MID"
+                photo="saka"
                 tier="gold"
-                rating={88}
-                bgt={87}
+                rating={91}
+                bgt={89}
                 ftt={92}
-                roi={94}
+                roi={95}
               />
             </div>
           </div>
@@ -393,9 +392,10 @@ export const TransferLabSceneV2: React.FC = () => {
         <div
           style={{
             position: "absolute",
-            bottom: 50,
+            bottom: 40,
+            left: "50%",
             opacity: wcOp,
-            transform: `translateY(${wcY}px)`,
+            transform: `translateX(-50%) translateY(${wcY}px)`,
             zIndex: 30,
             ...cardStyle({
               padding: "10px 24px",
