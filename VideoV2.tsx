@@ -21,17 +21,17 @@ import { C } from "./tokens";
 // 8. Explosive Conversion Outro: 880 → 980  (3.3s)
 
 const SCENES_V2 = [
-  { id: "hook", start: 0, dur: 130, Component: HookScene },
-  { id: "reveal", start: 130, dur: 130, Component: RevealSceneV2 },
-  { id: "pitch", start: 260, dur: 120, Component: PitchViewSceneV2 },
-  { id: "kpi", start: 380, dur: 135, Component: KpiRadarSceneV2 },
-  { id: "transfer", start: 515, dur: 135, Component: TransferLabSceneV2 },
-  { id: "captain", start: 650, dur: 120, Component: FeatureSceneV2 },
-  { id: "leaguespy", start: 770, dur: 110, Component: LeagueSpySceneV2 },
-  { id: "cta", start: 880, dur: 100, Component: CTASceneV2 },
+  { id: "hook", start: 0, dur: 125, Component: HookScene },
+  { id: "reveal", start: 125, dur: 122, Component: RevealSceneV2 },
+  { id: "pitch", start: 247, dur: 115, Component: PitchViewSceneV2 },
+  { id: "kpi", start: 362, dur: 128, Component: KpiRadarSceneV2 },
+  { id: "transfer", start: 490, dur: 128, Component: TransferLabSceneV2 },
+  { id: "captain", start: 618, dur: 115, Component: FeatureSceneV2 },
+  { id: "leaguespy", start: 733, dur: 105, Component: LeagueSpySceneV2 },
+  { id: "cta", start: 838, dur: 85, Component: CTASceneV2 },
 ];
 
-const SEAMS = [130, 260, 380, 515, 650, 770, 880];
+const SEAMS = [125, 247, 362, 490, 618, 733, 838];
 const TRANSITION_HALF_SPAN = 9;
 
 // Cinematic Neon Laser Shutter & Light Flare that bridges scenes smoothly
@@ -94,20 +94,20 @@ const TransitionWipeOverlay: React.FC = () => {
 export const FplScoutAdV2: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: C.midnight }}>
-      {/* ── 1. Dynamic Master BGM Track (Siege Cinematic) ── */}
+      {/* ── 1. Dynamic Master BGM Track (Siege Cinematic - 30.77s = 923 frames) ── */}
       <Audio
         src={staticFile("audio/bgm_siege.mp3")}
         volume={(f) =>
-          interpolate(f, [0, 20, 940, 980], [0, 0.45, 0.45, 0], {
+          interpolate(f, [0, 20, 895, 923], [0, 0.45, 0.45, 0], {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
           })
         }
       />
 
-      {/* ── 2. Impact Sound Effect: Soccer Ball Smash at Frame 18 ── */}
-      <Sequence from={18} durationInFrames={60}>
-        <Audio src={staticFile("audio/sfx_impact.wav")} volume={0.8} />
+      {/* ── 2. Clean Deep Sub-Bass Soccer Impact at Frame 18 ── */}
+      <Sequence from={18} durationInFrames={45}>
+        <Audio src={staticFile("audio/sfx_impact.wav")} volume={0.7} />
       </Sequence>
 
       {/* Visual Scenes */}

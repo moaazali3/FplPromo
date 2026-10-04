@@ -28,7 +28,7 @@ export const Root: React.FC = () => (
     <Composition
       id="FplScoutAdV2"
       component={FplScoutAdV2}
-      durationInFrames={980}
+      durationInFrames={923}
       fps={30}
       width={1920}
       height={1080}
@@ -36,7 +36,7 @@ export const Root: React.FC = () => (
     <Composition
       id="FplScoutAdV2Vertical"
       component={FplScoutAdV2}
-      durationInFrames={980}
+      durationInFrames={923}
       fps={30}
       width={1080}
       height={1920}

@@ -236,30 +236,58 @@ export const FeatureSceneV2: React.FC = () => {
               zIndex: 35,
             }}
           >
-            {/* Pulsing Risk Rings */}
+            {/* Concentric Circle Gauge Hub */}
             <div
               style={{
-                position: "absolute",
-                top: 0,
-                width: 170,
-                height: 170,
-                borderRadius: "50%",
-                border: "2px dashed rgba(255, 75, 75, 0.45)",
-                transform: `rotate(${f * 1.2}deg)`,
-                boxShadow: "0 0 30px rgba(255,75,75,0.25)",
-                pointerEvents: "none",
+                position: "relative",
+                width: 140,
+                height: 140,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            />
+            >
+              {/* Concentric Pulsing Risk Ring */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: -20,
+                  left: -20,
+                  width: 180,
+                  height: 180,
+                  borderRadius: "50%",
+                  border: "2px dashed rgba(255, 75, 75, 0.55)",
+                  transform: `rotate(${f * 1.2}deg)`,
+                  boxShadow: "0 0 30px rgba(255, 75, 75, 0.3)",
+                  pointerEvents: "none",
+                }}
+              />
 
-            <CircularMetricGauge
-              value={78}
-              progress={gaugeProg}
-              color="#FF4B4B"
-              unit="%"
-              label="DIFFERENTIAL RISK"
-              size={140}
-              strokeWidth={10}
-            />
+              <CircularMetricGauge
+                value={78}
+                progress={gaugeProg}
+                color="#FF4B4B"
+                unit="%"
+                size={140}
+                strokeWidth={10}
+              />
+            </div>
+
+            {/* Label placed cleanly below the concentric circles */}
+            <div
+              style={{
+                fontFamily: "Outfit, Cairo, sans-serif",
+                fontWeight: 800,
+                fontSize: 12,
+                color: "#94A3B8",
+                marginTop: 10,
+                letterSpacing: 1,
+                textTransform: "uppercase",
+                textAlign: "center",
+              }}
+            >
+              DIFFERENTIAL RISK
+            </div>
 
             {/* Differential Slam Stamp */}
             <div

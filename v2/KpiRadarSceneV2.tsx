@@ -251,38 +251,54 @@ export const KpiRadarSceneV2: React.FC = () => {
               zIndex: 35,
             }}
           >
-            {/* Pulsing ring */}
+            {/* Concentric VS Hub */}
             <div
               style={{
-                position: "absolute",
-                width: 120,
-                height: 120,
-                borderRadius: "50%",
-                border: "2px dashed rgba(255, 215, 0, 0.6)",
-                transform: `rotate(${f * 1.5}deg)`,
-                boxShadow: "0 0 30px rgba(255,215,0,0.4)",
-              }}
-            />
-
-            <div
-              style={{
+                position: "relative",
                 width: 76,
                 height: 76,
-                borderRadius: "50%",
-                background: "linear-gradient(135deg, #FF4B4B 0%, #B8860B 100%)",
-                border: "3px solid #FFFFFF",
-                boxShadow: "0 0 35px rgba(255,75,75,0.8), 0 0 60px rgba(255,215,0,0.6)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontFamily: "Outfit, sans-serif",
-                fontWeight: 900,
-                fontSize: 26,
-                color: "#FFFFFF",
-                letterSpacing: 1,
               }}
             >
-              VS
+              {/* Concentric Pulsing Ring */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: -20,
+                  left: -20,
+                  width: 116,
+                  height: 116,
+                  borderRadius: "50%",
+                  border: "2px dashed rgba(255, 215, 0, 0.65)",
+                  transform: `rotate(${f * 1.5}deg)`,
+                  boxShadow: "0 0 30px rgba(255, 215, 0, 0.4)",
+                  pointerEvents: "none",
+                }}
+              />
+
+              <div
+                style={{
+                  width: 76,
+                  height: 76,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #FF4B4B 0%, #B8860B 100%)",
+                  border: "3px solid #FFFFFF",
+                  boxShadow: "0 0 35px rgba(255, 75, 75, 0.8), 0 0 60px rgba(255, 215, 0, 0.6)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontFamily: "Outfit, sans-serif",
+                  fontWeight: 900,
+                  fontSize: 26,
+                  color: "#FFFFFF",
+                  letterSpacing: 1,
+                  zIndex: 2,
+                }}
+              >
+                VS
+              </div>
             </div>
 
             <div
